@@ -13,7 +13,7 @@ class Object:
         self.vx = vx
         self.vy = vy
 
-    def recalc(self, a_x, a_y):
+    def recalculate(self, a_x, a_y):
         self.x += self.vx * step + a_x * step ** 2 / 2
         self.y += self.vy * step + a_y * step ** 2 / 2
 
@@ -28,7 +28,6 @@ class Object:
             return pi / 2
         else:
             return abs(atan(self.vy / self.vx))
-
 
 
 def dist(p1, p2):
@@ -62,7 +61,7 @@ for i in range(n):
     planet1.vr = v * sin(angle)
     ay = a * sin(alpha)
     ax = a * cos(alpha)
-    planet1.recalc(ax, ay)
+    planet1.recalculate(ax, ay)
     r1 = dist(planet1, planet2)
 
     v = sqrt(2 * e / planet1.m + 2 * G * planet2.m / r1)
@@ -72,20 +71,19 @@ for i in range(n):
     planet1.vx = planet1.vr * cos(alpha) + planet1.vn * sin(alpha)
     planet1.vy = planet1.vr * sin(alpha) + planet1.vn * cos(alpha)
 
-    # current = os.getcwd()
-    # if not os.path.exists("{}\{}".format(current, name)):
-    #     os.makedirs("{}\{}".format(current, name))
-    # plt.axis([-10000000, 10000000, -10000000, 10000000])
-    # plt.scatter(planet1.x, planet1.y, 100)
-    # plt.scatter(planet2.x, planet2.y, 2000)
-    #
-    #
-    # plt.savefig("{}\{}\{}.png".format(current, name, i), format="png", dpi=72)
-    # plt.close()
+    current = os.getcwd()
+    if not os.path.exists("{}\{}".format(current, name)):
+        os.makedirs("{}\{}".format(current, name))
+    plt.axis([-10000000, 10000000, -10000000, 10000000])
+    plt.scatter(planet1.x, planet1.y, 100)
+    plt.scatter(planet2.x, planet2.y, 2000)
+
+    plt.savefig("{}\{}\{}.png".format(current, name, i), format="png", dpi=72)
+    plt.close()
 
 
-# with imageio.get_writer('{}\{}\satellite.gif'.format(current, name), mode='I') as writer:
-#     for i in range(n):
-#         filename = str(i) + ".png"
-#         image = imageio.imread('{}\{}\{}'.format(current, name, filename))
-#         writer.append_data(image)
+with imageio.get_writer('{}\{}\satellite.gif'.format(current, name), mode='I') as writer:
+    for i in range(n):
+        filename = str(i) + ".png"
+        image = imageio.imread('{}\{}\{}'.format(current, name, filename))
+        writer.append_data(image)
