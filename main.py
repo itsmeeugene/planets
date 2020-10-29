@@ -41,7 +41,7 @@ planet2 = Object(m2, x2, y2, vx2, vy2)
 
 t = 0
 step = 20
-n = 50
+n = 10
 name = "photos_" + str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
 
 r = dist(planet1, planet2)
@@ -72,18 +72,18 @@ for i in range(n):
     planet1.vy = planet1.vr * sin(alpha) + planet1.vn * cos(alpha)
 
     current = os.getcwd()
-    if not os.path.exists("{}\{}".format(current, name)):
-        os.makedirs("{}\{}".format(current, name))
+    if not os.path.exists("{}/{}".format(current, name)):
+        os.makedirs("{}/{}".format(current, name))
     plt.axis([-10000000, 10000000, -10000000, 10000000])
     plt.scatter(planet1.x, planet1.y, 100)
     plt.scatter(planet2.x, planet2.y, 2000)
 
-    plt.savefig("{}\{}\{}.png".format(current, name, i), format="png", dpi=72)
+    plt.savefig("{}/{}/{}.png".format(current, name, i), format="png", dpi=72)
     plt.close()
 
 
-with imageio.get_writer('{}\{}\satellite.gif'.format(current, name), mode='I') as writer:
+with imageio.get_writer('{}/{}/satellite.gif'.format(current, name), mode='I') as writer:
     for i in range(n):
         filename = str(i) + ".png"
-        image = imageio.imread('{}\{}\{}'.format(current, name, filename))
+        image = imageio.imread('{}/{}/{}'.format(current, name, filename))
         writer.append_data(image)
