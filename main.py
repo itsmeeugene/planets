@@ -38,10 +38,11 @@ G = 6.67 * 10 ** -11
 m1, m2, vx1, vy1, vx2, vy2, x1, y1, x2, y2 = 100, 5.9722 * 10 ** 24, 0, 7844, 0, 0, -6371000, 0, 0, 0
 planet1 = Object(m1, x1, y1, vx1, vy1)
 planet2 = Object(m2, x2, y2, vx2, vy2)
+coords = []
 
 t = 0
 step = 20
-n = 10
+n = 60
 name = "photos_" + str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
 
 r = dist(planet1, planet2)
@@ -70,13 +71,15 @@ for i in range(n):
     alpha = planet1.alpha(planet2)
     planet1.vx = planet1.vr * cos(alpha) + planet1.vn * sin(alpha)
     planet1.vy = planet1.vr * sin(alpha) + planet1.vn * cos(alpha)
-
+    coords.append((planet1.x, planet1.y))
     current = os.getcwd()
     if not os.path.exists("{}/{}".format(current, name)):
         os.makedirs("{}/{}".format(current, name))
     plt.axis([-10000000, 10000000, -10000000, 10000000])
     plt.scatter(planet1.x, planet1.y, 100)
     plt.scatter(planet2.x, planet2.y, 2000)
+    for coord in coords:
+        plt.scatter(coord[0], coord[1], 1, c='black')
 
     plt.savefig("{}/{}/{}.png".format(current, name, i), format="png", dpi=72)
     plt.close()
