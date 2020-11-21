@@ -97,7 +97,6 @@ for i in range(n):
     plt.savefig("{}/{}/{}.png".format(current, name, i), format="png", dpi=72)
     plt.close()
 
-# сделать отрисовку круговой вместо прямоугольной
 
 with imageio.get_writer('{}/{}/satellite.gif'.format(current, name), mode='I') as writer:
     for i in range(n):
