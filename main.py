@@ -36,7 +36,7 @@ def dist(p1, p2):
 
 G = 6.67 * 10 ** -11
 m1, m2 = 100, 5.9722 * 10 ** 24
-vx1, vy1 = 0, 12844
+vx1, vy1 = 0, 18000
 vx2, vy2 = 0, 5000
 x1, y1 = -6371000, 0
 x2, y2 = 0, 0
@@ -111,7 +111,7 @@ for i in range(n):
             verticalalignment='top',
             transform=ax.transAxes)
     plt.scatter(planet1.x, planet1.y, 100)
-    plt.scatter(planet2.x, planet2.y, 2000)
+    plt.scatter(planet2.x, planet2.y, 1000)
     for coord in coords:
         plt.scatter(coord[0], coord[1], 1, c='black')
 
