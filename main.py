@@ -36,9 +36,9 @@ def dist(p1, p2):
 
 G = 6.67 * 10 ** -11
 m1, m2 = 100, 5.9722 * 10 ** 24
-vx1, vy1 = 0, 18000
+vx1, vy1 = 18000, 5000
 vx2, vy2 = 0, 5000
-x1, y1 = -6371000, -63710000
+x1, y1 = -63710000, -637100
 x2, y2 = 0, 0
 
 planet1 = Object(m1, x1, y1, vx1, vy1)
@@ -46,8 +46,8 @@ planet2 = Object(m2, x2, y2, vx2, vy2)
 coords = []  # сохраняем траекторию
 
 t = 0
-step = 50
-n = 250
+step = 40
+n = 200
 name = "photos_" + str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
 
 r = dist(planet1, planet2)
@@ -93,6 +93,9 @@ for i in range(n):
 
     coords.append((planet1.x, planet1.y))
 
+    if len(coords) > 60:
+        coords = coords[20:]
+
     current = os.getcwd()
     if not os.path.exists("{}/{}".format(current, name)):
         os.makedirs("{}/{}".format(current, name))
@@ -102,11 +105,11 @@ for i in range(n):
     right = left + width
     top = bottom + height
     fig = plt.figure()
-    plt.axis('off')
+
     ax = fig.add_subplot(111)
     ax.set_aspect(2)
 
-    ax.text(right, top, '               e = {}'.format(round(e)),
+    ax.text(right, top, '              e = {}'.format(round(e), round(v)),
             horizontalalignment='left',
             verticalalignment='top',
             transform=ax.transAxes)
