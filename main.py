@@ -38,7 +38,7 @@ G = 6.67 * 10 ** -11
 m1, m2 = 100, 5.9722 * 10 ** 24
 vx1, vy1 = 0, 18000
 vx2, vy2 = 0, 5000
-x1, y1 = -6371000, 0
+x1, y1 = -6371000, -63710000
 x2, y2 = 0, 0
 
 planet1 = Object(m1, x1, y1, vx1, vy1)
@@ -47,7 +47,7 @@ coords = []  # сохраняем траекторию
 
 t = 0
 step = 50
-n = 150
+n = 250
 name = "photos_" + str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
 
 r = dist(planet1, planet2)
@@ -96,16 +96,16 @@ for i in range(n):
     current = os.getcwd()
     if not os.path.exists("{}/{}".format(current, name)):
         os.makedirs("{}/{}".format(current, name))
-    # plt.axis([-10000000, 10000000, -3000000, 50000000])
 
     left, width = .25, .5
     bottom, height = .25, .5
     right = left + width
     top = bottom + height
-
     fig = plt.figure()
+    plt.axis('off')
     ax = fig.add_subplot(111)
     ax.set_aspect(2)
+
     ax.text(right, top, '               e = {}'.format(round(e)),
             horizontalalignment='left',
             verticalalignment='top',
